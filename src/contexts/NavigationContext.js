@@ -10,7 +10,7 @@ navPages.forEach(page => {
         navSelected.alterarValor(page.id);
     }
 });
-console.log(navSelected);
+
 const NavigationContext = React.createContext({
     selected: navSelected
 });
