@@ -1,11 +1,13 @@
 import React from 'react';
+import useSearch from '../../hooks/useSearch';
 
 function Search() {
 
-    console.log('oi');
+    const [value] = useSearch();
 
     return (
         <>
+            <h1>{value}</h1>
         </>
     );
 }
