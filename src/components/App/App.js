@@ -1,25 +1,29 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Header from '../Header/Header';
-import Search from '../Search/Search';
+import Header from '../Header';
+import Search from '../Search';
+import BooksList from '../BooksList';
+import BooksController from '../../controllers/BooksController';
 
 function App() {
+
+  const booksController = new BooksController();
 
   return (
     <Router>
       <Header></Header>
       <Switch>
         <Route exact path="/">
-          <h1>Reading</h1>
+          <BooksList type={booksController.types[0]} getBooks={booksController.getMyBooksFilterd}></BooksList>
         </Route>
         <Route path="/reading">
-          <h1>Reading</h1>
+          <BooksList type={booksController.types[0]} getBooks={booksController.getMyBooksFilterd}></BooksList>
         </Route>
         <Route path="/want_read">
-          <h1>Want to read</h1>
+          <BooksList type={booksController.types[1]} getBooks={booksController.getMyBooksFilterd}></BooksList>
         </Route>
         <Route path="/read">
-          <h1>Read</h1>
+          <BooksList type={booksController.types[2]} getBooks={booksController.getMyBooksFilterd}></BooksList>
         </Route>
         <Route path="/search/:type">
           <Search></Search>
