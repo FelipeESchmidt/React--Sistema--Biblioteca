@@ -39,6 +39,10 @@ function Book({book}) {
         return text.slice(0, limiter) + (text.length > limiter ? "..." : "");
     }
 
+    if(!book.authors){
+        book.authors = ["Unknown Author"];
+    }
+
     return (
         <Grid item>
             <Paper className={classes.paper}>

@@ -1,4 +1,4 @@
-import { getBook, getMyBooks, searchBooks, updateBook } from '../api/library.js';
+import { getMyBooks, searchBooks, updateBook } from '../api/library.js';
 import NavigationPages from '../data/NavigationPages';
 
 class BooksController {
@@ -19,10 +19,9 @@ class BooksController {
         this._inscritos = this._inscritos.filter(f => f !== func);
     }
 
-    getMyBooksFilterd(type, setDado, isDone) {
+    getMyBooksFilterd(type, setDado) {
         getMyBooks().then(data => {
             const myBooks = data.books.filter(book => book.shelf === type);
-            isDone = true;
             setDado(myBooks);
         });
     }
@@ -34,9 +33,10 @@ class BooksController {
 
     }
 
-    use() {
-        getBook();
-        searchBooks();
+    searchBooks(query, setDado){
+        searchBooks(query).then(data => {
+            setDado(data.books);
+        });
     }
 }
 
