@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import Book from '../Book';
 import Loading from '../Loading';
 import { Grid, Container } from '@material-ui/core/';
-import NavigationPages from '../../data/NavigationPages';
+import ApiContext from '../../contexts/ApiContext';
 
-let startLibrary = {};
-NavigationPages.pages.forEach((page) => startLibrary[page.sharf] = null);
+function BooksList({ type }) {
 
-function BooksList({ type, getBooks }) {
+    const context = useContext(ApiContext);
 
-    const [library, setLibrary] = useState(startLibrary);
+    const [library, setLibrary] = useState(null);
+    const [change, setChange] = useState(false);
 
-    if (library[type] === null) {
-        getBooks(type).then(books => {
-            const tempLibrary = { ...library };
-            tempLibrary[type] = books;
-            setLibrary(tempLibrary);
-        });
-        return (<Loading></Loading>);
+    useEffect(() => {
+        setLibrary(null);
+
+        context.controller.getMyBooksFilterd(type, setLibrary);
+        context.controller.inscrever(handleChangeBooks);
+
+        setChange(false);
+
+        return function cleanUP(){
+            context.controller.desinscrever(handleChangeBooks);
+        }
+    }, [type, context, change]);
+
+    function handleChangeBooks(){
+        setChange(true);
+    }
+
+    if(!library){
+        return <Loading position="middle" padding={4}></Loading> ;
     }
 
     return (
@@ -25,11 +38,10 @@ function BooksList({ type, getBooks }) {
                 <Grid
                     container
                     direction="row"
-                    justifyContent="space-between"
                     alignItems="flex-start"
                     spacing={2}
                 >
-                    {library[type].map((book) => <h1 key={book.id}>{book.title}</h1>)}
+                    {library.map((book) => <Book key={book.id} book={book}></Book>)}
                 </Grid>
             </Container>
         </>

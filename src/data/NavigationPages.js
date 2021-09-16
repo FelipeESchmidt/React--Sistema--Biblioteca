@@ -4,19 +4,19 @@ class NavigationPages {
             id: 0,
             title: 'Currently Reading',
             link: '/reading',
-            sharf: 'currentlyReading'
+            shelf: 'currentlyReading'
         },
         {
             id: 1,
             title: 'Want to read',
             link: '/want_read',
-            sharf: 'wantToRead'
+            shelf: 'wantToRead'
         },
         {
             id: 2,
             title: 'Read',
             link: '/read',
-            sharf: 'read'
+            shelf: 'read'
         }
     ];
 }
