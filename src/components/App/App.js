@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import Header from '../Header';
 import Search from '../Search';
 import BooksList from '../BooksList';
+import Breadcrumb from '../Breadcrumb';
 import BooksController from '../../controllers/BooksController';
 import ApiContext from '../../contexts/ApiContext';
 
@@ -14,6 +15,7 @@ function App() {
     <ApiContext.Provider value={{controller: bc}}>
       <Router>
         <Header></Header>
+        <Breadcrumb></Breadcrumb>
         <Switch>
           <Route exact path="/">
             <BooksList type={bc.types[0]} getBooks={bc.getMyBooksFilterd} updateBook={bc.updateBook}></BooksList>
