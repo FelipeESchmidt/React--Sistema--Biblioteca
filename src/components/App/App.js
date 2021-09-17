@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Header from '../Header';
+import Footer from '../Footer';
 import Search from '../Search';
 import BooksList from '../BooksList';
 import Breadcrumb from '../Breadcrumb';
@@ -37,6 +38,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        <Footer></Footer>
       </Router>
     </ApiContext.Provider>
   );
