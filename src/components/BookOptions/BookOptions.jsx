@@ -45,9 +45,11 @@ function BookOptions({ book }) {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
-
-        context.controller.updateBook(book, option);
-        // Criar alerta
+        
+        if(option){
+            context.controller.updateBook(book, option);
+            // Criar alerta
+        }
 
         setOpen(false);
     };

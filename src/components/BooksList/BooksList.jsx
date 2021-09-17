@@ -19,32 +19,31 @@ function BooksList({ type }) {
 
         setChange(false);
 
-        return function cleanUP(){
+        return function cleanUP() {
             context.controller.desinscrever(handleChangeBooks);
         }
     }, [type, context, change]);
 
-    function handleChangeBooks(){
+    function handleChangeBooks() {
         setChange(true);
     }
 
-    if(!library){
-        return <Loading position="middle" padding={4}></Loading> ;
+    if (!library) {
+        return <Loading position="middle" padding={4}></Loading>;
     }
 
     return (
-        <>
-            <Container>
-                <Grid
-                    container
-                    direction="row"
-                    alignItems="flex-start"
-                    spacing={2}
-                >
-                    {library.map((book) => <Book key={book.id} book={book}></Book>)}
-                </Grid>
-            </Container>
-        </>
+        <Container style={{marginBottom: "200px"}}>
+            <Grid
+                container
+                direction="row"
+                alignItems="flex-start"
+                justifyContent="center"
+                spacing={2}
+            >
+                {library.map((book) => <Book key={book.id} book={book}></Book>)}
+            </Grid>
+        </Container>
     );
 }
 

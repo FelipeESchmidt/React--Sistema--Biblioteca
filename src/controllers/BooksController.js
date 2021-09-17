@@ -34,8 +34,12 @@ class BooksController {
     }
 
     searchBooks(query, setDado){
-        searchBooks(query).then(data => {
-            setDado(data.books);
+        searchBooks(query).then(allOnes => {
+            getMyBooks().then(myOnes => {
+                const allMyBooksID = myOnes.books.map(book => book.id);
+                const notMyBooks = allOnes.books.filter(book => !allMyBooksID.includes(book.id));
+                setDado(notMyBooks);
+            });
         });
     }
 }

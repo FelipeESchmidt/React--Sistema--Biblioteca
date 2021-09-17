@@ -12,13 +12,22 @@ function Search() {
     const context = useContext(ApiContext);
 
     const [library, setLibrary] = useState(null);
+    const [change, setChange] = useState(false);
 
     useEffect(() => {
         setLibrary(null);
 
         context.controller.searchBooks(value, setLibrary);
-        
-    }, [value, context]);
+        context.controller.inscrever(handleChangeBooks);
+
+        return function cleanUP() {
+            context.controller.desinscrever(handleChangeBooks);
+        }
+    }, [value, context, change]);
+
+    function handleChangeBooks() {
+        setChange(true);
+    }
 
     if (!library) {
         return <Loading position="middle" padding={4}></Loading>;
@@ -26,11 +35,12 @@ function Search() {
 
     return (
         <>
-            <Container>
+            <Container style={{marginBottom: "200px"}}>
                 <Grid
                     container
                     direction="row"
                     alignItems="flex-start"
+                    justifyContent="center"
                     spacing={2}
                 >
                     {library.map((book) => <Book key={book.id} book={book}></Book>)}

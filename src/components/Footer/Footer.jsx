@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         width: "100%",
-        marginTop: "30px",
         padding: "20px",
         backgroundColor: theme.palette.grey[300]
     },
