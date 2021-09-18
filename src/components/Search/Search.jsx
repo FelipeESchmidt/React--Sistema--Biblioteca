@@ -20,6 +20,8 @@ function Search() {
         context.controller.searchBooks(value, setLibrary);
         context.controller.inscrever(handleChangeBooks);
 
+        setChange(false);
+
         return function cleanUP() {
             context.controller.desinscrever(handleChangeBooks);
         }

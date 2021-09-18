@@ -48,8 +48,8 @@ function Book({book}) {
             <Paper className={classes.paper}>
                 <img className={classes.image} src={book.imageLinks.smallThumbnail} alt={"Capa livro: " + book.title} />
                 <div className={classes.texts}>
-                    <Typography className={classes.title} variant="subtitle1">{limitText(book.title, 18)}</Typography>
-                    <Typography className={classes.authors} variant="subtitle2">{limitText(book.authors.join(', '), 24)}</Typography>
+                    <Typography className={classes.title} variant="subtitle1">{limitText(book.title, 17)}</Typography>
+                    <Typography className={classes.authors} variant="subtitle2">{limitText(book.authors.join(', '), 20)}</Typography>
                 </div>
                 <div className={classes.optionsWrapper}>
                     <BookOptions book={book}></BookOptions>

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper, MenuList, MenuItem, Button, ClickAwayListener, Popper } from '@material-ui/core/';
 import NavigationPages from "../../data/NavigationPages";
 import ApiContext from '../../contexts/ApiContext';
+import useAlert from '../../hooks/useAlert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,6 +21,8 @@ function BookOptions({ book }) {
     const classes = useStyles();
 
     const context = useContext(ApiContext);
+    // eslint-disable-next-line
+    const [mensagem, setMensagem, messageContext] = useAlert();
     
     const pages = NavigationPages.pages;
     const currentPage = pages.filter(page => page.shelf === book.shelf);
@@ -48,7 +51,12 @@ function BookOptions({ book }) {
         
         if(option){
             context.controller.updateBook(book, option);
-            // Criar alerta
+            const pageOption = pages.filter(page => option === page.shelf);
+            if(pageOption.length !== 0){
+                messageContext.message.alterarMensagem({text: book.title + ' movido para: ' + pageOption[0].title, display: 'block'});
+            }else{
+                messageContext.message.alterarMensagem({text: book.title + ' removido de: ' + currentPage[0].title, display: 'block'});
+            }
         }
 
         setOpen(false);

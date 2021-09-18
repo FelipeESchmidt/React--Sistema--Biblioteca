@@ -5,6 +5,7 @@ import Footer from '../Footer';
 import Search from '../Search';
 import BooksList from '../BooksList';
 import Breadcrumb from '../Breadcrumb';
+import Alert from '../Alert';
 import BooksController from '../../controllers/BooksController';
 import ApiContext from '../../contexts/ApiContext';
 
@@ -13,8 +14,9 @@ function App() {
   const bc = new BooksController();
 
   return (
-    <ApiContext.Provider value={{controller: bc}}>
+    <ApiContext.Provider value={{ controller: bc }}>
       <Router>
+        <Alert></Alert>
         <Header></Header>
         <Breadcrumb></Breadcrumb>
         <Switch>
