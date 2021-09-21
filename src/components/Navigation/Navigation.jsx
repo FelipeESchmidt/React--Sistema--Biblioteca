@@ -35,7 +35,7 @@ function Navigation() {
         navValue.selected.alterarValor(newValue);
         clearSearch();
     };
-    
+
     const handleClickEvent = (event) => {
         history.push('');
         navValue.selected.alterarValor(0);
@@ -63,7 +63,7 @@ function Navigation() {
                 </Tabs>
             </Grid>
             <Grid item>
-                <SearchInput onUse={handleUseSearch} />
+                <SearchInput onUse={handleUseSearch} searchWidth={300} />
             </Grid>
         </>
     );

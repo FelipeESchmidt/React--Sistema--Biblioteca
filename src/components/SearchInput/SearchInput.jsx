@@ -4,14 +4,14 @@ import SearchTerms from '../../data/SearchTerms';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-function SearchInput({onUse}) {
-    
+function SearchInput({ onUse, searchWidth }) {
+
     const [value, searchValue] = useSearch();
 
     const terms = SearchTerms.terms;
 
     const handleChange = (event, newSelection) => {
-        if(newSelection != null){
+        if (newSelection != null) {
             searchValue.selected.alterarValor(newSelection);
             onUse(newSelection);
         }
@@ -25,7 +25,7 @@ function SearchInput({onUse}) {
             disableClearable
             options={terms}
             getOptionLabel={(option) => option}
-            style={{ width: 300 }}
+            style={{ width: searchWidth }}
             renderInput={(params) => (<TextField {...params} placeholder="Search other books" variant="outlined" />)}
         />
     );
