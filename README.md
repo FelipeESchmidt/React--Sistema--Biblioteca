@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Avaliação
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esse é o template inicial para o projeto final que compreende o módulo 2 do programa de bolsas em ReactJS. O objetivo desse template é poupar tempo com um exemplo estático de HTML e CSS, porém sem nenhuma funcionalidade que é necessária para finalizar o projeto. Seu trabalho aqui é adicionar interatividade ao projeto refatorando o código estático disponível nesse template.
 
-## Available Scripts
+O objetivo é ter um aplicativo que mostre quais livros eu já li, estou lendo ou quero ler em estantes, preenchidas pelos dados consumidos da API e usando React para montar a tela dinamicamente conforme os dados são modificados.
 
-In the project directory, you can run:
+## Começar
 
-### `npm start`
+Você pode começar executando `yarn/npm install` no terminal e depois `yarn/npm start` para começar o servidor de desenvolvimento, isso vai abrir seu browser automaticamente com hot reload habilitado.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Exemplo da Aplicação Final
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+ - https://compasso-reads.netlify.app
 
-### `npm test`
+## Servidor Backend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para simplificar o processo de desenvolvimento, um backend já foi criado para esse app. O arquivo [`api.js`](./src/api.js) contém os métodos necessários para fazer as operações necessárias no backend:
 
-### `npm run build`
+* [`getBook`](#getBook)
+* [`getMyBooks`](#getMyBooks)
+* [`searchBooks`](#searchBooks)
+* [`updateBook`](#updateBook)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `getBook`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> Pesquisa e retorna os dados de um dos meus livros.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```jsx
+getBook(BOOK_ID).then(function(data) {
+  const book = data.book
 
-### `npm run eject`
+  // ...
+})
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `getMyBooks`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> Pesquisa e retorna todos os meus livros.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```jsx
+getMyBooks().then(function(data) {
+  const books = data.books
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  // ...
+})
+```
 
-## Learn More
+### `searchBooks`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> Pesquisa e retorna todos os livros de um determinado assunto, que podem ou não estar nos meus livros.
+> O termo pesquisado deve ser um dos listados nas [palavras-chave](./PALAVRAS_CHAVE.md), outros termos podem não funcionar.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```jsx
+searchBooks(PALAVRA_CHAVE).then(function(data) {
+  const books = data.books
 
-### Code Splitting
+  // ...
+})
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `updateBook`
 
-### Analyzing the Bundle Size
+> Atualiza um livro para que ele pertença à uma determinada estante. Retorna todas as categorias da estante e os id's de livros pertencentes a cada estante.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```jsx
+updateBook(BOOK, ESTANTE).then(function(data) {
+  const estouLendoIDs = data.currentlyReading
+  const queroLerIDs = data.wantToRead
+  const lidosIDs = data.read
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  // ...
+})
+```
