@@ -7,7 +7,10 @@ import useSearch from '../../hooks/useSearch';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        margin: "30px 80px"
+        margin: "30px 80px",
+        [theme.breakpoints.down('xs')]: {
+            margin: "30px 20px",
+        },
     }
 }));
 
