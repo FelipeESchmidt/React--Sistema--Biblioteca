@@ -43,6 +43,11 @@ function Book({book}) {
         book.authors = ["Unknown Author"];
     }
 
+    if(!book.imageLinks){
+        book["imageLinks"] = {};
+        book["imageLinks"]["smallThumbnail"] = "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg";
+    }
+
     return (
         <Grid item>
             <Paper className={classes.paper}>
